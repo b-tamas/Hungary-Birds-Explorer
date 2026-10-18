@@ -107,6 +107,7 @@
 .bird-mark { background: radial-gradient(ellipse at 73% 23%, #e7ac7b 0, transparent 28%), linear-gradient(142deg, #d5dfc8 0%, #9bb29d 47%, #57786c 100%); }
 .bird-mark::before { content: ''; position:absolute; width:65%; height:48%; top:30%; left:19%; border-radius:72% 32% 65% 28%; background:#283b35; transform:rotate(-12deg); box-shadow:inset 18px 4px 0 -7px #bd775b; }
 .bird-mark::after { content: ''; position:absolute; width:25%; height:3px; background:#253b34; left:0; bottom:18%; transform:rotate(-2deg); box-shadow: 12px 3px 0 #253b34, 29px 5px 0 #253b34; opacity:.8; }
+.bird-mark.has-photo::before, .bird-mark.has-photo::after { display:none; }
 .bird-card:hover .bird-mark { filter: saturate(1.08); }
 .bird-card:hover .bird-mark::before { transform: rotate(-8deg) translateY(-2px); }
 .audio-wave span { display:block; width:2px; border-radius:5px; background:currentColor; animation:wave 1s ease-in-out infinite alternate; }

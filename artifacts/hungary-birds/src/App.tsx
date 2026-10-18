@@ -205,10 +205,11 @@ function SoundControl({ bird, compact = false }: { bird: Bird; compact?: boolean
 }
 
 function BirdArtwork({ bird, large = false }: { bird: Bird; large?: boolean }) {
-  return <div aria-hidden="true" className={`bird-mark relative isolate overflow-hidden ${large ? 'h-[220px] sm:h-[275px]' : 'h-[145px]'}`}>
-    <div className="absolute inset-x-0 bottom-0 h-[35%] bg-gradient-to-t from-[#425f51]/25 to-transparent" />
+  return <div className={`bird-mark relative isolate overflow-hidden ${bird.image ? 'has-photo' : ''} ${large ? 'h-[220px] sm:h-[275px]' : 'h-[145px]'}`}>
+    {bird.image && <img src={bird.image} alt={`${bird.en} (${bird.latin})`} loading="lazy" onError={(event) => { event.currentTarget.remove(); event.currentTarget.parentElement?.classList.remove('has-photo'); }} className="absolute inset-0 size-full object-cover object-center" />}
+    <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#253d34]/75 to-transparent" />
     <span className="absolute left-[12%] top-[18%] h-12 w-12 rounded-full bg-[#f0d5a4]/60 blur-[1px]" />
-    <span className="absolute right-[12%] top-[16%] text-[8px] uppercase tracking-[.16em] text-[#f8f1df]/80">{bird.category.split(' ')[0]} · HUNGARY</span>
+    <span className="absolute right-[12%] top-[16%] text-[8px] uppercase tracking-[.16em] text-white/85 drop-shadow">{bird.category.split(' ')[0]} · HUNGARY</span>
     <span className="absolute bottom-[8%] left-[12%] h-[1px] w-[75%] bg-[#425d50]/75" />
   </div>;
 }
@@ -260,6 +261,11 @@ function Portal() {
             <article key={activeBird.id} className="overflow-hidden rounded-2xl border border-[#d9dbcf] bg-[#fbfaf4] shadow-[0_8px_28px_rgba(44,59,48,.045)] reveal">
               <div className="relative"><BirdArtwork bird={activeBird} large /><div className="absolute bottom-4 left-5 text-[#fff8ea]"><span className="mono text-[9px] uppercase tracking-[.16em] text-white/75">Field note</span><p className="serif mt-0.5 text-2xl">{activeBird.hu}</p></div><button onClick={() => setSelected(results[(results.findIndex((b) => b.id === activeBird.id) + 1) % results.length])} aria-label="Next bird" data-testid="button-next-bird" className="absolute right-4 top-4 grid size-9 place-items-center rounded-full border border-white/45 bg-[#f8f5eb]/75 text-[#365447] backdrop-blur hover:bg-white"><ArrowRight size={15} /></button></div>
               <div className="p-5 sm:p-6">
+                {activeBird.imageSource && activeBird.imageCredit && <p className="mb-4 flex flex-wrap gap-x-1 text-[9px] leading-4 text-[#879087]">
+                  <span>Photo:</span>
+                  <a href={activeBird.imageSource} target="_blank" rel="noreferrer" className="underline decoration-[#abb4a6] underline-offset-2 hover:text-[#315b4e]">{activeBird.imageCredit} · Wikimedia Commons</a>
+                  {activeBird.imageLicense && activeBird.imageLicenseUrl && <><span>·</span><a href={activeBird.imageLicenseUrl} target="_blank" rel="noreferrer" className="underline decoration-[#abb4a6] underline-offset-2 hover:text-[#315b4e]">{activeBird.imageLicense}</a></>}
+                </p>}
                 <div className="flex flex-wrap items-start justify-between gap-3"><div><h2 className="serif text-[28px] leading-tight tracking-[-.03em] text-[#2d473d]">{activeBird.en}</h2><p className="mt-1 text-[12px] italic text-[#758178]">{activeBird.latin}</p></div><span className="rounded-full bg-[#e9eee4] px-3 py-1.5 text-[9px] font-semibold text-[#536e5d]">{activeBird.status}</span></div>
                 <p className="mt-4 border-l-2 border-[#c28c68] pl-3 text-[12px] leading-[1.8] text-[#596a60]">{activeBird.traits}</p>
                 <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-4 border-y border-[#e5e4d9] py-4">

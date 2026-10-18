@@ -1,3 +1,5 @@
+import { birdMedia, type BirdMedia } from './bird-media';
+
 export type Bird = {
   id: string;
   hu: string;
@@ -12,15 +14,11 @@ export type Bird = {
   status: string;
   traits: string;
   call: string;
-  sound?: string;
-  soundCredit?: string;
-  soundSource?: string;
-  soundLicense?: string;
-};
+} & Partial<BirdMedia>;
 
-export const birds: Bird[] = [
-  { id: 'blackbird', hu: 'Fekete rigó', en: 'Common Blackbird', latin: 'Turdus merula', habitat: 'Gardens, parks, woodland edges', category: 'Gardens & towns', diet: 'Earthworms, insects, berries and fallen fruit', size: '24–25 cm', wingspan: '34–38 cm', migration: 'Resident; some northern birds pass through', status: 'Least Concern', traits: 'Male is unmistakable in his all-black plumage, bright orange-yellow bill and eye-ring. Often seen hopping on lawns, then pausing upright.', call: 'A mellow, fluting song from a rooftop or treetop, often at first and last light; sharp “tchink” alarm notes.', sound: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Common_Blackbird_song_(Turdus_merula).ogg', soundCredit: 'Diana Tudor · Common Blackbird song · Wikimedia Commons', soundSource: 'https://commons.wikimedia.org/wiki/File:Common_Blackbird_song_(Turdus_merula).ogg', soundLicense: 'https://creativecommons.org/licenses/by/4.0/' },
-  { id: 'great-tit', hu: 'Széncinege', en: 'Great Tit', latin: 'Parus major', habitat: 'Gardens, orchards, parks and broadleaf woods', category: 'Gardens & towns', diet: 'Caterpillars, insects, seeds and nuts', size: '14 cm', wingspan: '22–25 cm', migration: 'Resident', status: 'Least Concern', traits: 'Largest Hungarian tit. Look for a black head, white cheeks and a vivid yellow belly crossed by a black stripe.', call: 'A clear, repetitive “teacher, teacher” song, plus a lively range of metallic calls.', sound: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Parus_major_-_Great_Tit_XC129643.ogg', soundCredit: 'Gavin Vella · Great Tit XC129643 · Wikimedia Commons', soundSource: 'https://commons.wikimedia.org/wiki/File:Parus_major_-_Great_Tit_XC129643.ogg', soundLicense: 'https://creativecommons.org/licenses/by-sa/3.0/' },
+const birdEntries: Omit<Bird, keyof BirdMedia>[] = [
+  { id: 'blackbird', hu: 'Fekete rigó', en: 'Common Blackbird', latin: 'Turdus merula', habitat: 'Gardens, parks, woodland edges', category: 'Gardens & towns', diet: 'Earthworms, insects, berries and fallen fruit', size: '24–25 cm', wingspan: '34–38 cm', migration: 'Resident; some northern birds pass through', status: 'Least Concern', traits: 'Male is unmistakable in his all-black plumage, bright orange-yellow bill and eye-ring. Often seen hopping on lawns, then pausing upright.', call: 'A mellow, fluting song from a rooftop or treetop, often at first and last light; sharp “tchink” alarm notes.' },
+  { id: 'great-tit', hu: 'Széncinege', en: 'Great Tit', latin: 'Parus major', habitat: 'Gardens, orchards, parks and broadleaf woods', category: 'Gardens & towns', diet: 'Caterpillars, insects, seeds and nuts', size: '14 cm', wingspan: '22–25 cm', migration: 'Resident', status: 'Least Concern', traits: 'Largest Hungarian tit. Look for a black head, white cheeks and a vivid yellow belly crossed by a black stripe.', call: 'A clear, repetitive “teacher, teacher” song, plus a lively range of metallic calls.' },
   { id: 'house-sparrow', hu: 'Házi veréb', en: 'House Sparrow', latin: 'Passer domesticus', habitat: 'Villages, towns, farms and gardens', category: 'Gardens & towns', diet: 'Seeds and scraps; insects are important for chicks', size: '14–16 cm', wingspan: '19–25 cm', migration: 'Resident', status: 'Least Concern', traits: 'A sociable, compact bird of people. Males have a grey crown, chestnut nape and black bib; females are softly brown and streaked.', call: 'A familiar, busy series of chirps and cheeps from hedges, eaves and feeder queues.' },
   { id: 'robin', hu: 'Vörösbegy', en: 'European Robin', latin: 'Erithacus rubecula', habitat: 'Gardens, scrub and leafy woodland', category: 'Gardens & towns', diet: 'Insects, spiders, worms and berries', size: '12.5–14 cm', wingspan: '20–22 cm', migration: 'Resident; winter visitors add to local numbers', status: 'Least Concern', traits: 'Round-bodied and alert, with a bright orange-red face and breast edged in grey. Often follows gardeners at work.', call: 'A delicate, liquid song with short phrases and pauses; thin ticking notes from cover.' },
   { id: 'chaffinch', hu: 'Erdei pinty', en: 'Common Chaffinch', latin: 'Fringilla coelebs', habitat: 'Woodland, parks, gardens and orchards', category: 'Gardens & towns', diet: 'Seeds and buds; insects in the breeding season', size: '14–16 cm', wingspan: '24.5–28.5 cm', migration: 'Resident and passage migrant', status: 'Least Concern', traits: 'Male has a blue-grey cap, pinkish breast and two striking white wing bars. Females are olive-brown with the same neat wing bars.', call: 'A brisk descending flourish ending in a sharp flourish, often followed by a short “pink”.' },
@@ -36,5 +34,10 @@ export const birds: Bird[] = [
   { id: 'common-cuckoo', hu: 'Kakukk', en: 'Common Cuckoo', latin: 'Cuculus canorus', habitat: 'Woodland edges, scrub, reedbeds and open country', category: 'Forests & woodland', diet: 'Hairy caterpillars and other insects', size: '32–34 cm', wingspan: '55–60 cm', migration: 'Summer visitor; winters in Africa', status: 'Least Concern', traits: 'Slim grey bird with pointed wings, long tail and barred underparts. Its flight can resemble a small hawk.', call: 'The male’s unmistakable two-note “cuck-oo” carries across the countryside in spring.' },
   { id: 'common-kestrel', hu: 'Vörös vércse', en: 'Common Kestrel', latin: 'Falco tinnunculus', habitat: 'Fields, grassland, towns and road verges', category: 'Fields & meadows', diet: 'Voles, mice, large insects and small birds', size: '32–39 cm', wingspan: '65–82 cm', migration: 'Resident and partial migrant', status: 'Least Concern', traits: 'Frequently hovers with fanned tail while scanning the ground. Male has a blue-grey head and tail; females are barred brown.', call: 'A rapid, high-pitched “kee-kee-kee” when alarmed or near the nest.' },
 ];
+
+export const birds: Bird[] = birdEntries.map((bird) => ({
+  ...bird,
+  ...birdMedia[bird.id],
+}));
 
 export const categories = ['All birds', 'Gardens & towns', 'Wetlands & rivers', 'Forests & woodland', 'Fields & meadows'];
