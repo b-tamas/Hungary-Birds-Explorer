@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Birds of Hungary"
+description = "A welcoming field guide to birds commonly found in Hungary, with species facts, photos, and playable bird calls. Includes account sign-in."
+version = "1.0.0"
+id = "artifacts/hungary-birds"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22728
+
+[services.development]
+run = "pnpm --filter @workspace/hungary-birds run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/hungary-birds", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/hungary-birds/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22728"
+BASE_PATH = "/"
