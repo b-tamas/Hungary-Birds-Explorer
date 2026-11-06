@@ -1,7 +1,7 @@
 kind = "web"
 previewPath = "/"
 title = "Birds of Hungary"
-description = "A welcoming field guide to birds commonly found in Hungary, with species facts, photos, and playable bird calls. Includes account sign-in."
+description = "A welcoming public field guide to birds commonly found in Hungary, with species facts, photos, and playable bird calls."
 version = "1.0.0"
 id = "artifacts/hungary-birds"
 router = "path"
@@ -17,11 +17,7 @@ run = "pnpm --filter @workspace/hungary-birds run dev"
 [services.production]
 build = [ "pnpm", "--filter", "@workspace/hungary-birds", "run", "build" ]
 serve = "static"
-publicDir = "artifacts/hungary-birds/dist/public"
-
-[[services.production.rewrites]]
-from = "/*"
-to = "/index.html"
+publicDir = "artifacts/hungary-birds/build"
 
 [services.env]
 PORT = "22728"

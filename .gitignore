@@ -2,6 +2,8 @@
 
 # compiled output
 dist
+**/.svelte-kit
+artifacts/hungary-birds/build
 tmp
 out-tsc
 *.tsbuildinfo
